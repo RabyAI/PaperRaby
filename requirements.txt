@@ -1,0 +1,8 @@
+# LLM APIs
+anthropic
+backoff
+openai
+# Viz
+matplotlib
+pypdf
+pymupdf4llm
