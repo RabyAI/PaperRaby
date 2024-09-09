@@ -9,7 +9,7 @@ import time
 import sys
 from datetime import datetime
 from raby.generate_ideas import generate_ideas, check_idea_novelty
-from raby.collect_data import collect_data_from_web
+from raby.collect_data import collect_data_from_web, collect_data_from_pdf
 
 NUM_REFLECTIONS = 3
 
@@ -48,6 +48,11 @@ def parse_arguments():
         "--collect-web-data",
         action="store_true",
         help="Read URLs from file and collect data from web",
+    )
+    parser.add_argument(
+        "--collect-pdf-data",
+        action="store_true",
+        help="Read PDF from file and collect data from pdf",
     )
     parser.add_argument(
         "--model",
@@ -158,3 +163,9 @@ if __name__ == "__main__":
             model=client_model,
         )
         
+    if args.collect_pdf_data:
+        collect_data_from_pdf(
+            base_dir=base_dir,
+            client=client,
+            model=client_model,
+        )

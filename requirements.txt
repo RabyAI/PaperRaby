@@ -9,5 +9,5 @@ pymupdf4llm
 # Misc
 requests
 backoff
-csv
 beautifulsoup4
+fitz
