@@ -19,8 +19,7 @@ This open-source project aims to leverage artificial intelligence to enhance the
    ```
    export OPENAI_API_KEY="YOUR KEY HERE"
    ```
-
-or the ANTHROPIC Claude API Key
+   
    ```
    export ANTHROPIC_API_KEY="YOUR KEY HERE"
    ```
