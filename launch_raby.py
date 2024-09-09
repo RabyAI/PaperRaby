@@ -18,23 +18,31 @@ def print_time():
 
 
 def parse_arguments():
-    parser = argparse.ArgumentParser(description="Run AI scientist experiments")
+    parser = argparse.ArgumentParser(description="Run Raby projects")
     parser.add_argument(
-        "--skip-idea-generation",
+        "--idea-generation",
+        default=False,
         action="store_true",
-        help="Skip idea generation and load existing ideas",
+        help="Idea generation and load existing ideas",
     )
     parser.add_argument(
-        "--skip-novelty-check",
-        action="store_true",
-        help="Skip novelty check and use existing ideas",
+        "--num-ideas",
+        type=int,
+        default=0,
+        help="Number of ideas to generate",
     )
-    # add type of experiment (nanoGPT, Boston, etc.)
     parser.add_argument(
-        "--experiment",
+        "--check-novelty",
+        default=False,
+        action="store_true",
+        help="Novelty check and use existing ideas",
+    )
+    # add type of project (nanoGPT, Boston, etc.)
+    parser.add_argument(
+        "--project",
         type=str,
-        default="nanoGPT",
-        help="Experiment to run Raby on.",
+        default="RabyAI",
+        help="Project to run Raby on.",
     )
     parser.add_argument(
         "--model",
@@ -70,12 +78,6 @@ def parse_arguments():
         type=int,
         default=0,
         help="Number of parallel processes to run. 0 for sequential execution.",
-    )
-    parser.add_argument(
-        "--num-ideas",
-        type=int,
-        default=50,
-        help="Number of ideas to generate",
     )
     return parser.parse_args()
 
@@ -136,19 +138,23 @@ if __name__ == "__main__":
     else:
         raise ValueError(f"Model {args.model} not supported.")
 
-    base_dir = osp.join("templates", args.experiment)
-    results_dir = osp.join("results", args.experiment)
-    ideas = generate_ideas(
-        base_dir,
-        client=client,
-        model=client_model,
-        skip_generation=args.skip_idea_generation,
-        max_num_generations=args.num_ideas,
-        num_reflections=NUM_REFLECTIONS,
-    )
-    ideas = check_idea_novelty(
-        ideas,
-        base_dir=base_dir,
-        client=client,
-        model=client_model,
-    )
+    base_dir = osp.join("templates", args.project)
+    results_dir = osp.join("results", args.project)
+
+    if args.num_ideas > 0:
+        ideas = generate_ideas(
+            base_dir,
+            client=client,
+            model=client_model,
+            generation=args.idea_generation,
+            max_num_generations=args.num_ideas,
+            num_reflections=NUM_REFLECTIONS,
+        )
+
+        ideas = check_idea_novelty(
+            ideas,
+            base_dir=base_dir,
+            client=client,
+            model=client_model,
+            novelty_check=args.check_novelty,
+        )

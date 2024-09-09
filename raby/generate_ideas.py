@@ -75,11 +75,11 @@ def generate_ideas(
     base_dir,
     client,
     model,
-    skip_generation=False,
+    generation=False,
     max_num_generations=20,
     num_reflections=5,
 ):
-    if skip_generation:
+    if not generation:
         # Load existing ideas from file
         try:
             with open(osp.join(base_dir, "ideas.json"), "r") as f:
@@ -362,189 +362,87 @@ def check_idea_novelty(
     client,
     model,
     max_num_iterations=10,
+    novelty_check=False,
 ):
-    with open(osp.join(base_dir, "data.json"), "r") as f:
-        code = f.read()
-    with open(osp.join(base_dir, "prompt.json"), "r") as f:
-        prompt = json.load(f)
-        task_description = prompt["task_description"]
+    if novelty_check:
+        with open(osp.join(base_dir, "data.json"), "r") as f:
+            code = f.read()
+        with open(osp.join(base_dir, "prompt.json"), "r") as f:
+            prompt = json.load(f)
+            task_description = prompt["task_description"]
 
-    for idx, idea in enumerate(ideas):
-        if "novel" in idea:
-            print(f"Skipping idea {idx}, already checked.")
-            continue
-
-        print(f"\nChecking novelty of idea {idx}: {idea['Name']}")
-
-        novel = False
-        msg_history = []
-        papers_str = ""
-
-        for j in range(max_num_iterations):
-            try:
-                text, msg_history = get_response_from_llm(
-                    novelty_prompt.format(
-                        current_round=j + 1,
-                        num_rounds=max_num_iterations,
-                        idea=idea,
-                        last_query_results=papers_str,
-                    ),
-                    client=client,
-                    model=model,
-                    system_message=novelty_system_msg.format(
-                        num_rounds=max_num_iterations,
-                        task_description=task_description,
-                        code=code,
-                    ),
-                    msg_history=msg_history,
-                )
-                if "decision made: novel" in text.lower():
-                    print("Decision made: novel after round", j)
-                    novel = True
-                    break
-                if "decision made: not novel" in text.lower():
-                    print("Decision made: not novel after round", j)
-                    break
-
-                ## PARSE OUTPUT
-                json_output = extract_json_between_markers(text)
-                assert json_output is not None, "Failed to extract JSON from LLM output"
-
-                ## SEARCH FOR PAPERS
-                query = json_output["Query"]
-                papers = search_for_papers(query, result_limit=10)
-                if papers is None:
-                    papers_str = "No papers found."
-
-                paper_strings = []
-                for i, paper in enumerate(papers):
-                    paper_strings.append(
-                        """{i}: {title}. {authors}. {venue}, {year}.\nNumber of citations: {cites}\nAbstract: {abstract}""".format(
-                            i=i,
-                            title=paper["title"],
-                            authors=paper["authors"],
-                            venue=paper["venue"],
-                            year=paper["year"],
-                            cites=paper["citationCount"],
-                            abstract=paper["abstract"],
-                        )
-                    )
-                papers_str = "\n\n".join(paper_strings)
-
-            except Exception as e:
-                print(f"Error: {e}")
+        for idx, idea in enumerate(ideas):
+            if "novel" in idea:
+                print(f"Skipping idea {idx}, already checked.")
                 continue
 
-        idea["novel"] = novel
+            print(f"\nChecking novelty of idea {idx}: {idea['Name']}")
 
-    # Save results to JSON file
-    results_file = osp.join(base_dir, "ideas.json")
-    with open(results_file, "w") as f:
-        json.dump(ideas, f, indent=4)
+            novel = False
+            msg_history = []
+            papers_str = ""
 
-    return ideas
+            for j in range(max_num_iterations):
+                try:
+                    text, msg_history = get_response_from_llm(
+                        novelty_prompt.format(
+                            current_round=j + 1,
+                            num_rounds=max_num_iterations,
+                            idea=idea,
+                            last_query_results=papers_str,
+                        ),
+                        client=client,
+                        model=model,
+                        system_message=novelty_system_msg.format(
+                            num_rounds=max_num_iterations,
+                            task_description=task_description,
+                            code=code,
+                        ),
+                        msg_history=msg_history,
+                    )
+                    if "decision made: novel" in text.lower():
+                        print("Decision made: novel after round", j)
+                        novel = True
+                        break
+                    if "decision made: not novel" in text.lower():
+                        print("Decision made: not novel after round", j)
+                        break
 
+                    ## PARSE OUTPUT
+                    json_output = extract_json_between_markers(text)
+                    assert json_output is not None, "Failed to extract JSON from LLM output"
 
-if __name__ == "__main__":
-    MAX_NUM_GENERATIONS = 32
-    NUM_REFLECTIONS = 5
-    import argparse
+                    ## SEARCH FOR PAPERS
+                    query = json_output["Query"]
+                    papers = search_for_papers(query, result_limit=10)
+                    if papers is None:
+                        papers_str = "No papers found."
 
-    parser = argparse.ArgumentParser(description="Generate AI scientist ideas")
-    # add type of experiment (nanoGPT, Boston, etc.)
-    parser.add_argument(
-        "--experiment",
-        type=str,
-        default="nanoGPT",
-        help="Experiment to run AI Scientist on.",
-    )
-    parser.add_argument(
-        "--model",
-        type=str,
-        default="gpt-4o-2024-05-13",
-        choices=[
-            "claude-3-5-sonnet-20240620",
-            "gpt-4o-2024-05-13",
-            "deepseek-coder-v2-0724",
-            "llama3.1-405b",
-        ],
-        help="Model to use for AI Scientist.",
-    )
-    parser.add_argument(
-        "--skip-idea-generation",
-        action="store_true",
-        help="Skip idea generation and use existing ideas.",
-    )
-    parser.add_argument(
-        "--check-novelty",
-        action="store_true",
-        help="Check novelty of ideas.",
-    )
-    args = parser.parse_args()
+                    paper_strings = []
+                    for i, paper in enumerate(papers):
+                        paper_strings.append(
+                            """{i}: {title}. {authors}. {venue}, {year}.\nNumber of citations: {cites}\nAbstract: {abstract}""".format(
+                                i=i,
+                                title=paper["title"],
+                                authors=paper["authors"],
+                                venue=paper["venue"],
+                                year=paper["year"],
+                                cites=paper["citationCount"],
+                                abstract=paper["abstract"],
+                            )
+                        )
+                    papers_str = "\n\n".join(paper_strings)
 
-    # Create client
-    if args.model == "claude-3-5-sonnet-20240620":
-        import anthropic
+                except Exception as e:
+                    print(f"Error: {e}")
+                    continue
 
-        print(f"Using Anthropic API with model {args.model}.")
-        client_model = "claude-3-5-sonnet-20240620"
-        client = anthropic.Anthropic()
-    elif args.model.startswith("bedrock") and "claude" in args.model:
-        import anthropic
+            idea["novel"] = novel
 
-        # Expects: bedrock/<MODEL_ID>
-        client_model = args.model.split("/")[-1]
+        # Save results to JSON file
+        results_file = osp.join(base_dir, "ideas.json")
+        with open(results_file, "w") as f:
+            json.dump(ideas, f, indent=4)
 
-        print(f"Using Amazon Bedrock with model {client_model}.")
-        client = anthropic.AnthropicBedrock()
-    elif args.model.startswith("vertex_ai") and "claude" in args.model:
-        import anthropic
+        return ideas
 
-        # Expects: vertex_ai/<MODEL_ID>
-        client_model = args.model.split("/")[-1]
-
-        print(f"Using Vertex AI with model {client_model}.")
-        client = anthropic.AnthropicVertex()
-    elif args.model == "gpt-4o-2024-05-13":
-        import openai
-
-        print(f"Using OpenAI API with model {args.model}.")
-        client_model = "gpt-4o-2024-05-13"
-        client = openai.OpenAI()
-    elif args.model == "deepseek-coder-v2-0724":
-        import openai
-
-        print(f"Using OpenAI API with {args.model}.")
-        client_model = "deepseek-coder-v2-0724"
-        client = openai.OpenAI(
-            api_key=os.environ["DEEPSEEK_API_KEY"], base_url="https://api.deepseek.com"
-        )
-    elif args.model == "llama3.1-405b":
-        import openai
-
-        print(f"Using OpenAI API with {args.model}.")
-        client_model = "meta-llama/llama-3.1-405b-instruct"
-        client = openai.OpenAI(
-            api_key=os.environ["OPENROUTER_API_KEY"],
-            base_url="https://openrouter.ai/api/v1",
-        )
-    else:
-        raise ValueError(f"Model {args.model} not supported.")
-
-    base_dir = osp.join("templates", args.experiment)
-    results_dir = osp.join("results", args.experiment)
-    ideas = generate_ideas(
-        base_dir,
-        client=client,
-        model=client_model,
-        skip_generation=args.skip_idea_generation,
-        max_num_generations=MAX_NUM_GENERATIONS,
-        num_reflections=NUM_REFLECTIONS,
-    )
-    if args.check_novelty:
-        ideas = check_idea_novelty(
-            ideas,
-            base_dir=base_dir,
-            client=client,
-            model=client_model,
-        )
