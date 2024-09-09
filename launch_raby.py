@@ -19,11 +19,12 @@ def print_time():
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Run Raby projects")
+    # add type of project (nanoGPT, Boston, etc.)
     parser.add_argument(
-        "--idea-generation",
-        default=False,
-        action="store_true",
-        help="Idea generation and load existing ideas",
+        "--project",
+        type=str,
+        default="RabyAI",
+        help="Project to run Raby on.",
     )
     parser.add_argument(
         "--num-ideas",
@@ -32,17 +33,16 @@ def parse_arguments():
         help="Number of ideas to generate",
     )
     parser.add_argument(
+        "--idea-generation",
+        default=False,
+        action="store_true",
+        help="Idea generation and load existing ideas",
+    )
+    parser.add_argument(
         "--check-novelty",
         default=False,
         action="store_true",
         help="Novelty check and use existing ideas",
-    )
-    # add type of project (nanoGPT, Boston, etc.)
-    parser.add_argument(
-        "--project",
-        type=str,
-        default="RabyAI",
-        help="Project to run Raby on.",
     )
     parser.add_argument(
         "--model",
@@ -65,19 +65,6 @@ def parse_arguments():
             "vertex_ai/claude-3-haiku@20240307",
         ],
         help="Model to use for AI Scientist.",
-    )
-    parser.add_argument(
-        "--writeup",
-        type=str,
-        default="latex",
-        choices=["latex"],
-        help="What format to use for writeup",
-    )
-    parser.add_argument(
-        "--parallel",
-        type=int,
-        default=0,
-        help="Number of parallel processes to run. 0 for sequential execution.",
     )
     return parser.parse_args()
 
