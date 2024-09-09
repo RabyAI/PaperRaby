@@ -9,13 +9,13 @@ import time
 import sys
 from datetime import datetime
 from raby.generate_ideas import generate_ideas, check_idea_novelty
+from raby.collect_data import collect_data_from_web
 
 NUM_REFLECTIONS = 3
 
 
 def print_time():
     print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Run Raby projects")
@@ -24,7 +24,7 @@ def parse_arguments():
         "--project",
         type=str,
         default="RabyAI",
-        help="Project to run Raby on.",
+        help="Research Project to run",
     )
     parser.add_argument(
         "--num-ideas",
@@ -43,6 +43,11 @@ def parse_arguments():
         default=False,
         action="store_true",
         help="Novelty check and use existing ideas",
+    )
+    parser.add_argument(
+        "--collect-web-data",
+        action="store_true",
+        help="Read URLs from file and collect data from web",
     )
     parser.add_argument(
         "--model",
@@ -145,3 +150,11 @@ if __name__ == "__main__":
             model=client_model,
             novelty_check=args.check_novelty,
         )
+
+    if args.collect_web_data:
+        collect_data_from_web(
+            base_dir=base_dir,
+            client=client,
+            model=client_model,
+        )
+        

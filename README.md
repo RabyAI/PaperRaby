@@ -28,7 +28,7 @@ This open-source project aims to leverage artificial intelligence to enhance the
 Create folder in templates and create below 3 files to begin with:
 1. prompt.json
 2. seed_ideas.json
-3. data.csv
+3. data.csv (will be used as context for idea generation and data analysis)
 
 ## Features
 
@@ -42,6 +42,14 @@ python launch_raby.py --project RabyAI --model "claude-3-5-sonnet-20240620" --nu
 
 ```
 python launch_raby.py --project RabyAI --model "claude-3-5-sonnet-20240620" --num-ideas 2 --check-novelty
+```
+
+### Data Collection
+
+Enter the webpage URLs in data-from-web.txt, and execute the following command to analyze and collect data from the web. The results will be saved in different data-from-web-[].csv files.
+
+```
+python launch_raby.py --project Blindbox --model "claude-3-5-sonnet-20240620" --collect-web-data
 ```
 
 ### In the queue

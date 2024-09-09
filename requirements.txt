@@ -10,3 +10,4 @@ pymupdf4llm
 requests
 backoff
 csv
+beautifulsoup4
