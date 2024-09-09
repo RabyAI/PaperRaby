@@ -17,12 +17,10 @@ This open-source project aims to leverage artificial intelligence to enhance the
    ```
 4. Add OpenAI API key to the environment
    ```
-   pip install -r requirements.txt
-   ```
    export OPENAI_API_KEY="YOUR KEY HERE"
    ```
 
-   or the ANTHROPIC Claude API Key
+or the ANTHROPIC Claude API Key
    ```
    export ANTHROPIC_API_KEY="YOUR KEY HERE"
    ```
