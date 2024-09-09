@@ -7,6 +7,7 @@ from raby.llm import get_response_from_llm, extract_json_between_markers
 
 import requests
 import backoff
+import csv
 
 S2_API_KEY = os.getenv("S2_API_KEY")
 
@@ -99,8 +100,10 @@ def generate_ideas(
     for seed_idea in seed_ideas:
         idea_str_archive.append(json.dumps(seed_idea))
 
-    with open(osp.join(base_dir, "data.json"), "r") as f:
-        code = f.read()
+
+    with open(osp.join(base_dir, "data.csv"), "r") as f:
+        reader = csv.DictReader(f)
+        code = json.dumps([row for _, row in zip(range(11), reader)])
 
     with open(osp.join(base_dir, "prompt.json"), "r") as f:
         prompt = json.load(f)

@@ -6,3 +6,7 @@ openai
 matplotlib
 pypdf
 pymupdf4llm
+# Misc
+requests
+backoff
+csv

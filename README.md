@@ -28,7 +28,7 @@ This open-source project aims to leverage artificial intelligence to enhance the
 Create folder in templates and create below 3 files to begin with:
 1. prompt.json
 2. seed_ideas.json
-3. data.json
+3. data.csv
 
 ## Features
 
