@@ -10,6 +10,16 @@ import json
 from PyPDF2 import PdfReader
 from datetime import datetime
 
+web_data_prompt = """{task_description}
+You are a data analysis expert. Please parse the given web content related to data into structured tabular data. Convert the following web content into CSV format tabular data:
+{text_content}
+"""
+
+pdf_data_prompt = """{task_description}
+You are a data analysis expert. Please parse the given PDF content related to data into structured tabular data. Convert the following PDF content into CSV format tabular data:
+{text_content}
+"""
+
 def collect_data_from_web(
     base_dir,
     client,
@@ -39,12 +49,12 @@ def collect_data_from_web(
         text_content = soup.get_text()
 
         # Send request to LLM
-        msg = f"""You are a data analysis expert. Please parse the given web content related to data into structured tabular data. Convert the following web content into CSV format tabular data:
-        {text_content}"""
-    
         msg_history = []
         text, msg_history = get_response_from_llm(
-            msg,
+            web_data_prompt.format(
+                task_description=prompt["task_description"],
+                text_content=text_content,
+            ),
             client=client,
             model=model,
             system_message=idea_system_prompt,
@@ -77,12 +87,12 @@ def collect_data_from_pdf(base_dir, client, model):
         text_content += page.extract_text()
 
     # Send request to LLM
-    msg = f"""You are a data analysis expert. Please parse the given PDF content related to data into structured tabular data. Convert the following PDF content into CSV format tabular data:
-    {text_content}"""
-
     msg_history = []
     text, msg_history = get_response_from_llm(
-        msg,
+        pdf_data_prompt.format(
+            task_description=prompt["task_description"],
+            text_content=text_content,
+        ),
         client=client,
         model=model,
         system_message=idea_system_prompt,
