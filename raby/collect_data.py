@@ -8,6 +8,7 @@ import os.path as osp
 import json
 
 from PyPDF2 import PdfReader
+from datetime import datetime
 
 def collect_data_from_web(
     base_dir,
@@ -54,7 +55,8 @@ def collect_data_from_web(
         parsed_data = text
 
         # Save parsed data as CSV file
-        with open(osp.join(base_dir, f"data-from-web-{urls.index(url)}.csv"), 'w', newline='', encoding='utf-16') as csvfile:
+        timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+        with open(osp.join(base_dir, f"data-from-web-{timestamp}.csv"), 'w', newline='', encoding='utf-16') as csvfile:
             csvfile.write(parsed_data)
 
     print("Data has been successfully saved to the data-from-web file.")
@@ -91,7 +93,9 @@ def collect_data_from_pdf(base_dir, client, model):
     parsed_data = text
 
     # Save parsed data as CSV file
-    with open(osp.join(base_dir, "data-from-pdf.csv"), 'w', newline='', encoding='utf-16') as csvfile:
+    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+    filename = f"data-from-pdf-{timestamp}.csv"
+    with open(osp.join(base_dir, filename), 'w', newline='', encoding='utf-16') as csvfile:
         csvfile.write(parsed_data)
 
     print("Data has been successfully saved to the data-from-pdf file.")

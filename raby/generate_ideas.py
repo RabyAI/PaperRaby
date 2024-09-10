@@ -4,6 +4,7 @@ import os.path as osp
 import time
 from typing import List, Dict, Union
 from raby.llm import get_response_from_llm, extract_json_between_markers
+from datetime import datetime
 
 import requests
 import backoff
@@ -169,7 +170,9 @@ def generate_ideas(
     for idea_str in idea_str_archive:
         ideas.append(json.loads(idea_str))
 
-    with open(osp.join(base_dir, "ideas.json"), "w") as f:
+    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+    filename = f"ideas-{timestamp}.json"
+    with open(osp.join(base_dir, filename), "w") as f:
         json.dump(ideas, f, indent=4)
 
     return ideas
