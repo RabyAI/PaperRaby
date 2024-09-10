@@ -52,7 +52,7 @@ Enter the webpage URLs in data-from-web.txt, and execute the following command t
 python launch_raby.py --project Blindbox --model "claude-3-5-sonnet-20240620" --collect-web-data
 ```
 
-Name the PDF from which you want to extract data as data.pdf and place it in the project folder, then execute the following command to analyze and collect data from the PDF. The results will be saved in data-from-pdf.csv files.
+Name the PDF from which you want to extract data as data-from-pdf.pdf and place it in the project folder, then execute the following command to analyze and collect data from the PDF. The results will be saved in data-from-pdf.csv files.
 
 ```
 python launch_raby.py --project Blindbox --model "claude-3-5-sonnet-20240620" --collect-pdf-data

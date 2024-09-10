@@ -80,7 +80,7 @@ def collect_data_from_pdf(base_dir, client, model):
     idea_system_prompt = prompt["system"]
 
     # Read PDF file
-    pdf_path = osp.join(base_dir, "data.pdf")
+    pdf_path = osp.join(base_dir, "data-from-pdf.pdf")
     pdf_reader = PdfReader(pdf_path)
     text_content = ""
     for page in pdf_reader.pages:
