@@ -59,7 +59,7 @@ Name the PDF from which you want to extract data as data-from-pdf.pdf and place 
 python launch_raby.py --project YOURPROJECT --model "claude-3-5-sonnet-20240620" --collect-pdf-data
 ```
 
-### Analysis data and create plots
+### Data analysis and create plots
 
 Consolidate your target idea in templates/YOURPROJECT/ideas.json
 Consolidate your data into data.csv file in templates/YOURPROJECT/data.csv
@@ -71,10 +71,10 @@ python launch_raby.py --project YOURPROJECT --model "claude-3-5-sonnet-20240620"
 
 ### In the queue
 
-- Automated literature review
-- Citation management and formatting
 - Outline generation for research papers
 - Draft writing assistance
+- Citation management and formatting
+- AI research paper review
 
 ## License
 This project is licensed under the Apache 2.0 License.

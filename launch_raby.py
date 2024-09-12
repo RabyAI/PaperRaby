@@ -122,11 +122,11 @@ def do_experiment(
     destination_dir = folder_name
     shutil.copytree(base_dir, destination_dir, dirs_exist_ok=True)
 
-    # with open(osp.join(base_dir, "data.csv"), "r") as f:
-    #     baseline_results = f.read()
     with open(osp.join(base_dir, "data.csv"), "r") as f:
-        reader = csv.DictReader(f)
-        baseline_results = json.dumps([row for _, row in zip(range(200), reader)])
+        baseline_results = f.read()
+    # with open(osp.join(base_dir, "data.csv"), "r") as f:
+    #     reader = csv.DictReader(f)
+    #     baseline_results = json.dumps([row for _, row in zip(range(200), reader)])
 
     vis_file = osp.join(folder_name, "plot.py")
     notes = osp.join(folder_name, "notes.txt")
