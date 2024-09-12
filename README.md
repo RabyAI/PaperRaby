@@ -40,6 +40,7 @@ python launch_raby.py --project RabyAI --model "claude-3-5-sonnet-20240620" --nu
 
 ### Research idea novelty check
 
+Select one of the ideas-xxx.json and change filename to ideas.json
 ```
 python launch_raby.py --project RabyAI --model "claude-3-5-sonnet-20240620" --num-ideas 2 --check-novelty
 ```

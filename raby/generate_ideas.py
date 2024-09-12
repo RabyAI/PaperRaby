@@ -200,8 +200,11 @@ def generate_next_idea(
         for seed_idea in seed_ideas[:1]:
             idea_archive.append(seed_idea)
     else:
-        with open(osp.join(base_dir, "data.json"), "r") as f:
-            code = f.read()
+        
+        with open(osp.join(base_dir, "data.csv"), "r") as f:
+            reader = csv.DictReader(f)
+            code = json.dumps([row for _, row in zip(range(11), reader)])
+
         with open(osp.join(base_dir, "prompt.json"), "r") as f:
             prompt = json.load(f)
         idea_system_prompt = prompt["system"]
@@ -371,8 +374,11 @@ def check_idea_novelty(
     novelty_check=False,
 ):
     if novelty_check:
-        with open(osp.join(base_dir, "data.json"), "r") as f:
-            code = f.read()
+        
+        with open(osp.join(base_dir, "data.csv"), "r") as f:
+            reader = csv.DictReader(f)
+            code = json.dumps([row for _, row in zip(range(11), reader)])
+
         with open(osp.join(base_dir, "prompt.json"), "r") as f:
             prompt = json.load(f)
             task_description = prompt["task_description"]
