@@ -1,5 +1,6 @@
 # LLM APIs
 anthropic
+aider-chat
 backoff
 openai
 # Viz
@@ -11,3 +12,9 @@ requests
 backoff
 beautifulsoup4
 fitz
+torch
+numpy
+datasets
+tiktoken
+wandb
+tqdm

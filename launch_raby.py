@@ -4,15 +4,21 @@ import shutil
 import json
 import argparse
 import multiprocessing
+import torch
 import os
 import time
 import sys
+import csv
 from datetime import datetime
+from aider.coders import Coder
+from aider.models import Model
+from aider.io import InputOutput
+
 from raby.generate_ideas import generate_ideas, check_idea_novelty
 from raby.collect_data import collect_data_from_web, collect_data_from_pdf
+from raby.perform_experiments import perform_experiments
 
 NUM_REFLECTIONS = 3
-
 
 def print_time():
     print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
@@ -55,6 +61,24 @@ def parse_arguments():
         help="Read PDF from file and collect data from pdf",
     )
     parser.add_argument(
+        "--experiment",
+        default=False,
+        action="store_true",
+        help="Experiment to run.",
+    )
+    parser.add_argument(
+        "--writeup",
+        default=False,
+        action="store_true",
+        help="Write the paper.",
+    )
+    parser.add_argument(
+        "--improvement",
+        default=False,
+        action="store_true",
+        help="Improve the paper.",
+    )
+    parser.add_argument(
         "--model",
         type=str,
         default="claude-3-5-sonnet-20240620",
@@ -78,6 +102,170 @@ def parse_arguments():
     )
     return parser.parse_args()
 
+
+def do_experiment(
+    base_dir,
+    results_dir,
+    idea,
+    model,
+    client,
+    client_model,
+    writeup,
+    improvement,
+    log_file=False,
+):
+    ## CREATE PROJECT FOLDER
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    idea_name = f"{timestamp}_{idea['Name']}"
+    folder_name = osp.join(results_dir, idea_name)
+    assert not osp.exists(folder_name), f"Folder {folder_name} already exists."
+    destination_dir = folder_name
+    shutil.copytree(base_dir, destination_dir, dirs_exist_ok=True)
+
+    # with open(osp.join(base_dir, "data.csv"), "r") as f:
+    #     baseline_results = f.read()
+    with open(osp.join(base_dir, "data.csv"), "r") as f:
+        reader = csv.DictReader(f)
+        baseline_results = json.dumps([row for _, row in zip(range(200), reader)])
+
+    vis_file = osp.join(folder_name, "plot.py")
+    notes = osp.join(folder_name, "notes.txt")
+    with open(notes, "w") as f:
+        f.write(f"# Title: {idea['Title']}\n")
+        f.write(f"# Experiment description: {idea['Experiment']}\n")
+        f.write(f"## Run 0: Baseline\n")
+        f.write(f"Results: {baseline_results}\n")
+        f.write(f"Description: Baseline results.\n")
+    if log_file:
+        original_stdout = sys.stdout
+        original_stderr = sys.stderr
+        log_path = osp.join(folder_name, "log.txt")
+        log = open(log_path, "a")
+        sys.stdout = log
+        sys.stderr = log
+    try:
+        print_time()
+        print(f"*Starting idea: {idea_name}*")
+
+        fnames = [vis_file, notes]
+        
+        io = InputOutput(
+            yes=True, chat_history_file=f"{folder_name}/{idea_name}_aider.txt"
+        )
+        if model == "deepseek-coder-v2-0724":
+            main_model = Model("deepseek/deepseek-coder")
+        elif model == "llama3.1-405b":
+            main_model = Model("openrouter/meta-llama/llama-3.1-405b-instruct")
+        else:
+            main_model = Model(model)
+        coder = Coder.create(
+            main_model=main_model,
+            fnames=fnames,
+            io=io,
+            stream=False,
+            use_git=False,
+            edit_format="diff",
+        )
+
+        print_time()
+        print(f"*Starting Experiments*")
+        try:
+            success = perform_experiments(idea, folder_name, coder, baseline_results)
+        except Exception as e:
+            print(f"Error during experiments: {e}")
+            print(f"Experiments failed for idea {idea_name}")
+            return False
+
+        if not success:
+            print(f"Experiments failed for idea {idea_name}")
+            return False
+
+        # print_time()
+        # print(f"*Starting Writeup*")
+        # ## PERFORM WRITEUP
+        # if writeup == "latex":
+        #     writeup_file = osp.join(folder_name, "latex", "template.tex")
+
+        #     if model == "deepseek-coder-v2-0724":
+        #         main_model = Model("deepseek/deepseek-coder")
+        #     elif model == "llama3.1-405b":
+        #         main_model = Model("openrouter/meta-llama/llama-3.1-405b-instruct")
+        #     else:
+        #         main_model = Model(model)
+        #     coder = Coder.create(
+        #         main_model=main_model,
+        #         fnames=fnames,
+        #         io=io,
+        #         stream=False,
+        #         use_git=False,
+        #         edit_format="diff",
+        #     )
+        #     try:
+        #         perform_writeup(idea, folder_name, coder, client, client_model)
+        #     except Exception as e:
+        #         print(f"Failed to perform writeup: {e}")
+        #         return False
+        #     print("Done writeup")
+        # else:
+        #     raise ValueError(f"Writeup format {writeup} not supported.")
+
+        # print_time()
+        # print(f"*Starting Review*")
+        # ## REVIEW PAPER
+        # if writeup == "latex":
+        #     try:
+        #         paper_text = load_paper(f"{folder_name}/{idea['Name']}.pdf")
+        #         review = perform_review(
+        #             paper_text,
+        #             model="gpt-4o-2024-05-13",
+        #             client=openai.OpenAI(),
+        #             num_reflections=5,
+        #             num_fs_examples=1,
+        #             num_reviews_ensemble=5,
+        #             temperature=0.1,
+        #         )
+        #         # Store the review in separate review.txt file
+        #         with open(osp.join(folder_name, "review.txt"), "w") as f:
+        #             f.write(json.dumps(review, indent=4))
+        #     except Exception as e:
+        #         print(f"Failed to perform review: {e}")
+        #         return False
+
+        # ## IMPROVE WRITEUP
+        # if writeup == "latex" and improvement:
+        #     print_time()
+        #     print(f"*Starting Improvement*")
+        #     try:
+        #         perform_improvement(review, coder)
+        #         generate_latex(
+        #             coder, folder_name, f"{folder_name}/{idea['Name']}_improved.pdf"
+        #         )
+        #         paper_text = load_paper(f"{folder_name}/{idea['Name']}_improved.pdf")
+        #         review = perform_review(
+        #             paper_text,
+        #             model="gpt-4o-2024-05-13",
+        #             client=openai.OpenAI(),
+        #             num_reflections=5,
+        #             num_fs_examples=1,
+        #             num_reviews_ensemble=5,
+        #             temperature=0.1,
+        #         )
+        #         # Store the review in separate review.txt file
+        #         with open(osp.join(folder_name, "review_improved.txt"), "w") as f:
+        #             f.write(json.dumps(review))
+        #     except Exception as e:
+        #         print(f"Failed to perform improvement: {e}")
+        #         return False
+        # return True
+    except Exception as e:
+        print(f"Failed to evaluate idea {idea_name}: {str(e)}")
+        return False
+    finally:
+        print("FINISHED IDEA")
+        if log_file:
+            sys.stdout = original_stdout
+            sys.stderr = original_stderr
+            log.close()
 
 if __name__ == "__main__":
     args = parse_arguments()
@@ -169,3 +357,32 @@ if __name__ == "__main__":
             client=client,
             model=client_model,
         )
+
+
+    if args.experiment:
+        
+        # with open(osp.join(base_dir, "ideas.json"), "w") as f:
+        #     json.dump(ideas, f, indent=4)
+        # novel_ideas = [idea for idea in ideas if idea["novel"]]
+
+        with open(osp.join(base_dir, "ideas.json"), "r") as f:
+            ideas = json.load(f)
+        novel_ideas = [idea for idea in ideas]
+
+        for idea in novel_ideas:
+            print(f"Processing idea: {idea['Name']}")
+        try:
+            success = do_experiment(
+                base_dir,
+                results_dir,
+                idea,
+                args.model,
+                client,
+                client_model,
+                args.writeup,
+                args.improvement,
+                # True
+            )
+            print(f"Completed idea: {idea['Name']}, Success: {success}")
+        except Exception as e:
+            print(f"Failed to evaluate idea {idea['Name']}: {str(e)}")
