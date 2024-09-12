@@ -35,14 +35,14 @@ Create folder in templates and create below 3 files to begin with:
 ### Automated research idea brainstorm
 
 ```
-python launch_raby.py --project RabyAI --model "claude-3-5-sonnet-20240620" --num-ideas 2 --idea-generation
+python launch_raby.py --project YOURPROJECT --model "claude-3-5-sonnet-20240620" --num-ideas 2 --idea-generation
 ```
 
 ### Research idea novelty check
 
 Select one of the ideas-xxx.json and change filename to ideas.json
 ```
-python launch_raby.py --project RabyAI --model "claude-3-5-sonnet-20240620" --num-ideas 2 --check-novelty
+python launch_raby.py --project YOURPROJECT --model "claude-3-5-sonnet-20240620" --num-ideas 2 --check-novelty
 ```
 
 ### Data Collection
@@ -50,13 +50,23 @@ python launch_raby.py --project RabyAI --model "claude-3-5-sonnet-20240620" --nu
 Enter the webpage URLs in data-from-web.txt, and execute the following command to analyze and collect data from the web. The results will be saved in different data-from-web-[].csv files.
 
 ```
-python launch_raby.py --project Blindbox --model "claude-3-5-sonnet-20240620" --collect-web-data
+python launch_raby.py --project YOURPROJECT --model "claude-3-5-sonnet-20240620" --collect-web-data
 ```
 
 Name the PDF from which you want to extract data as data-from-pdf.pdf and place it in the project folder, then execute the following command to analyze and collect data from the PDF. The results will be saved in data-from-pdf.csv files.
 
 ```
-python launch_raby.py --project Blindbox --model "claude-3-5-sonnet-20240620" --collect-pdf-data
+python launch_raby.py --project YOURPROJECT --model "claude-3-5-sonnet-20240620" --collect-pdf-data
+```
+
+### Analysis data and create plots
+
+Consolidate your target idea in templates/YOURPROJECT/ideas.json
+Consolidate your data into data.csv file in templates/YOURPROJECT/data.csv
+This feature will help to analysis data and create plots into results/YOURPROJECT/datetime_ideaname
+
+```
+python launch_raby.py --project YOURPROJECT --model "claude-3-5-sonnet-20240620" --experiment
 ```
 
 ### In the queue
