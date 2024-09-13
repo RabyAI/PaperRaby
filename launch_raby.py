@@ -17,6 +17,7 @@ from aider.io import InputOutput
 from raby.generate_ideas import generate_ideas, check_idea_novelty
 from raby.collect_data import collect_data_from_web, collect_data_from_pdf
 from raby.perform_experiments import perform_experiments
+from raby.perform_writeup import perform_writeup
 
 NUM_REFLECTIONS = 3
 
@@ -70,7 +71,7 @@ def parse_arguments():
         "--writeup",
         default=False,
         action="store_true",
-        help="Write the paper.",
+        help="Writeup to run.",
     )
     parser.add_argument(
         "--improvement",
@@ -110,8 +111,6 @@ def do_experiment(
     model,
     client,
     client_model,
-    writeup,
-    improvement,
     log_file=False,
 ):
     ## CREATE PROJECT FOLDER
@@ -122,11 +121,11 @@ def do_experiment(
     destination_dir = folder_name
     shutil.copytree(base_dir, destination_dir, dirs_exist_ok=True)
 
-    with open(osp.join(base_dir, "data.csv"), "r") as f:
-        baseline_results = f.read()
     # with open(osp.join(base_dir, "data.csv"), "r") as f:
-    #     reader = csv.DictReader(f)
-    #     baseline_results = json.dumps([row for _, row in zip(range(200), reader)])
+    #     baseline_results = f.read()
+    with open(osp.join(base_dir, "data.csv"), "r") as f:
+        reader = csv.DictReader(f)
+        baseline_results = json.dumps([row for _, row in zip(range(200), reader)])
 
     vis_file = osp.join(folder_name, "plot.py")
     notes = osp.join(folder_name, "notes.txt")
@@ -180,34 +179,76 @@ def do_experiment(
             print(f"Experiments failed for idea {idea_name}")
             return False
 
-        # print_time()
-        # print(f"*Starting Writeup*")
-        # ## PERFORM WRITEUP
-        # if writeup == "latex":
-        #     writeup_file = osp.join(folder_name, "latex", "template.tex")
+    except Exception as e:
+        print(f"Failed to evaluate idea {idea_name}: {str(e)}")
+        return False
+    finally:
+        print("FINISHED IDEA")
+        if log_file:
+            sys.stdout = original_stdout
+            sys.stderr = original_stderr
+            log.close()
 
-        #     if model == "deepseek-coder-v2-0724":
-        #         main_model = Model("deepseek/deepseek-coder")
-        #     elif model == "llama3.1-405b":
-        #         main_model = Model("openrouter/meta-llama/llama-3.1-405b-instruct")
-        #     else:
-        #         main_model = Model(model)
-        #     coder = Coder.create(
-        #         main_model=main_model,
-        #         fnames=fnames,
-        #         io=io,
-        #         stream=False,
-        #         use_git=False,
-        #         edit_format="diff",
-        #     )
-        #     try:
-        #         perform_writeup(idea, folder_name, coder, client, client_model)
-        #     except Exception as e:
-        #         print(f"Failed to perform writeup: {e}")
-        #         return False
-        #     print("Done writeup")
-        # else:
-        #     raise ValueError(f"Writeup format {writeup} not supported.")
+
+def do_writeup(
+    base_dir,
+    results_dir,
+    idea,
+    idea_name,
+    model,
+    client,
+    client_model,
+    log_file=False,
+):
+    ## CREATE PROJECT FOLDER
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    
+    folder_name = osp.join(results_dir, idea_name)
+    destination_dir = folder_name
+
+    vis_file = osp.join(folder_name, "plot.py")
+    notes = osp.join(folder_name, "notes.txt")
+    
+    if log_file:
+        original_stdout = sys.stdout
+        original_stderr = sys.stderr
+        log_path = osp.join(folder_name, "log.txt")
+        log = open(log_path, "a")
+        sys.stdout = log
+        sys.stderr = log
+    try:
+        print_time()
+        print(f"*Starting writeup for idea: {idea_name}*")
+
+        fnames = [vis_file, notes]
+        
+        io = InputOutput(
+            yes=True, chat_history_file=f"{folder_name}/{idea_name}_aider.txt"
+        )
+
+        ## PERFORM WRITEUP
+        writeup_file = osp.join(folder_name, "latex", "template.tex")
+
+        if model == "deepseek-coder-v2-0724":
+            main_model = Model("deepseek/deepseek-coder")
+        elif model == "llama3.1-405b":
+            main_model = Model("openrouter/meta-llama/llama-3.1-405b-instruct")
+        else:
+            main_model = Model(model)
+        coder = Coder.create(
+            main_model=main_model,
+            fnames=fnames,
+            io=io,
+            stream=False,
+            use_git=False,
+            edit_format="diff",
+        )
+        try:
+            perform_writeup(idea, folder_name, coder, client, client_model)
+        except Exception as e:
+            print(f"Failed to perform writeup: {e}")
+            return False
+        print("Done writeup")
 
         # print_time()
         # print(f"*Starting Review*")
@@ -258,7 +299,7 @@ def do_experiment(
         #         return False
         # return True
     except Exception as e:
-        print(f"Failed to evaluate idea {idea_name}: {str(e)}")
+        print(f"Failed to write idea {idea_name}: {str(e)}")
         return False
     finally:
         print("FINISHED IDEA")
@@ -379,10 +420,31 @@ if __name__ == "__main__":
                 args.model,
                 client,
                 client_model,
-                args.writeup,
-                args.improvement,
                 # True
             )
-            print(f"Completed idea: {idea['Name']}, Success: {success}")
+            print(f"Completed experiment for idea: {idea['Name']}, Success: {success}")
+        except Exception as e:
+            print(f"Failed to evaluate idea {idea['Name']}: {str(e)}")
+
+    if args.writeup:
+
+        with open(osp.join(base_dir, "ideas.json"), "r") as f:
+            ideas = json.load(f)
+        novel_ideas = [idea for idea in ideas]
+
+        for idea in novel_ideas:
+            print(f"Processing idea: {idea['Name']}")
+        try:
+            success = do_writeup(
+                base_dir,
+                results_dir,
+                idea,
+                idea['results_folder'],
+                args.model,
+                client,
+                client_model,
+                # True
+            )
+            print(f"Completed writeup for idea: {idea['Name']}, Success: {success}")
         except Exception as e:
             print(f"Failed to evaluate idea {idea['Name']}: {str(e)}")
