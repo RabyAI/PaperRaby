@@ -17,7 +17,7 @@ from aider.io import InputOutput
 from raby.generate_ideas import generate_ideas, check_idea_novelty
 from raby.collect_data import collect_data_from_web, collect_data_from_pdf
 from raby.perform_experiments import perform_experiments
-from raby.perform_writeup import perform_writeup
+from raby.perform_writeup import perform_writeup, generate_latex
 
 NUM_REFLECTIONS = 3
 
@@ -74,6 +74,12 @@ def parse_arguments():
         help="Writeup to run.",
     )
     parser.add_argument(
+        "--pdf",
+        default=False,
+        action="store_true",
+        help="Generate PDF only.",
+    )
+    parser.add_argument(
         "--improvement",
         default=False,
         action="store_true",
@@ -122,7 +128,7 @@ def do_experiment(
     shutil.copytree(base_dir, destination_dir, dirs_exist_ok=True)
 
     idea['results_folder'] = folder_name
-    with open(osp.join(results_dir, "ideas.json"), "r") as f:
+    with open(osp.join(base_dir, "ideas.json"), "r") as f:
         ideas = json.load(f)
     for i, existing_idea in enumerate(ideas):
         if existing_idea['Name'] == idea['Name']:
@@ -210,6 +216,7 @@ def do_writeup(
     model,
     client,
     client_model,
+    pdf=False,
     log_file=False,
 ):
     ## CREATE PROJECT FOLDER
@@ -255,12 +262,15 @@ def do_writeup(
             use_git=False,
             edit_format="diff",
         )
-        try:
-            perform_writeup(idea, folder_name, coder, client, client_model)
-        except Exception as e:
-            print(f"Failed to perform writeup: {e}")
-            return False
-        print("Done writeup")
+        if pdf:
+            generate_latex(coder, folder_name, f"{folder_name}/test.pdf")
+        else:
+            try:
+                perform_writeup(idea, folder_name, coder, client, client_model)
+            except Exception as e:
+                print(f"Failed to perform writeup: {e}")
+                return False
+            print("Done writeup")
 
         # print_time()
         # print(f"*Starting Review*")
@@ -440,7 +450,7 @@ if __name__ == "__main__":
 
     if args.writeup:
 
-        with open(osp.join(results_dir, "ideas.json"), "r") as f:
+        with open(osp.join(base_dir, "ideas.json"), "r") as f:
             ideas = json.load(f)
         novel_ideas = [idea for idea in ideas]
 
@@ -455,6 +465,7 @@ if __name__ == "__main__":
                 args.model,
                 client,
                 client_model,
+                pdf=args.pdf,
                 # True
             )
             print(f"Completed writeup for idea: {idea['Name']}, Success: {success}")
