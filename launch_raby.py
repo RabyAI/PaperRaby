@@ -121,6 +121,18 @@ def do_experiment(
     destination_dir = folder_name
     shutil.copytree(base_dir, destination_dir, dirs_exist_ok=True)
 
+    idea['results_folder'] = folder_name
+    with open(osp.join(results_dir, "ideas.json"), "r") as f:
+        ideas = json.load(f)
+    for i, existing_idea in enumerate(ideas):
+        if existing_idea['Name'] == idea['Name']:
+            ideas[i] = idea
+            break
+    else:
+        ideas.append(idea)
+    with open(osp.join(results_dir, "ideas.json"), "w") as f:
+        json.dump(ideas, f, indent=4)
+
     # with open(osp.join(base_dir, "data.csv"), "r") as f:
     #     baseline_results = f.read()
     with open(osp.join(base_dir, "data.csv"), "r") as f:
@@ -428,7 +440,7 @@ if __name__ == "__main__":
 
     if args.writeup:
 
-        with open(osp.join(base_dir, "ideas.json"), "r") as f:
+        with open(osp.join(results_dir, "ideas.json"), "r") as f:
             ideas = json.load(f)
         novel_ideas = [idea for idea in ideas]
 
