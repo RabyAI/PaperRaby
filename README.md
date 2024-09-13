@@ -69,10 +69,32 @@ This feature will help to analysis data and create plots into results/YOURPROJEC
 python launch_raby.py --project YOURPROJECT --model "claude-3-5-sonnet-20240620" --experiment
 ```
 
+### Research papers draft writing
+
+Before write the paper, please make sure pdflatex is installed:
+
+- Mac
+Install MacTex
+https://www.tug.org/mactex/
+
+- Linux
+sudo apt-get install texlive-full
+
+- Windows：
+Install MiKTeX or TeX Live
+
+Using AI write the paper based on the outline in latex/template.tex
+```
+python launch_raby.py --project Blindbox --model "claude-3-5-sonnet-20240620" --writeup
+```
+
+Generate PDF only
+```
+python launch_raby.py --project Blindbox --model "claude-3-5-sonnet-20240620" --writeup --pdf
+```
+
 ### In the queue
 
-- Outline generation for research papers
-- Draft writing assistance
 - Citation management and formatting
 - AI research paper review
 
