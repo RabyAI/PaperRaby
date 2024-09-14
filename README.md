@@ -15,7 +15,7 @@ This open-source project aims to leverage artificial intelligence to enhance the
    ```
    pip install -r requirements.txt
    ```
-4. Add OpenAI (or ANTHROPIC) API key to the environment
+4. Add [OpenAI](https://platform.openai.com/) or [ANTHROPIC](https://console.anthropic.com/) API key to the environment
    ```
    export OPENAI_API_KEY="YOUR KEY HERE"
    ```
