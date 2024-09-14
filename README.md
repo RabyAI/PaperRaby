@@ -23,6 +23,11 @@ This open-source project aims to leverage artificial intelligence to enhance the
    ```
    export ANTHROPIC_API_KEY="YOUR KEY HERE"
    ```
+5. Add [Semantic Scholar API](https://www.semanticscholar.org/product/api/tutorial) key to the environment
+   ```
+   export S2_API_KEY="YOUR KEY HERE"
+   ```
+
 
 ### Create Project
 Create folder in templates and create below 3 files to begin with:
