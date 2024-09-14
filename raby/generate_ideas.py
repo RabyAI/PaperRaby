@@ -170,8 +170,10 @@ def generate_ideas(
     for idea_str in idea_str_archive:
         ideas.append(json.loads(idea_str))
 
-    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-    filename = f"ideas-{timestamp}.json"
+    # timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+    # filename = f"ideas-{timestamp}.json"
+
+    filename = f"ideas.json"
     with open(osp.join(base_dir, filename), "w") as f:
         json.dump(ideas, f, indent=4)
 

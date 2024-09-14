@@ -35,14 +35,14 @@ Create folder in templates and create below 3 files to begin with:
 ### Automated research idea brainstorm
 
 ```
-python launch_raby.py --project YOURPROJECT --model "claude-3-5-sonnet-20240620" --num-ideas 2 --idea-generation
+python launch_raby.py --project YOURPROJECT --model "claude-3-5-sonnet-20240620" --num-ideas 1 --idea-generation
 ```
 
 ### Research idea novelty check
 
 Select one of the ideas-xxx.json and change filename to ideas.json
 ```
-python launch_raby.py --project YOURPROJECT --model "claude-3-5-sonnet-20240620" --num-ideas 2 --check-novelty
+python launch_raby.py --project YOURPROJECT --model "claude-3-5-sonnet-20240620" --num-ideas 1 --check-novelty
 ```
 
 ### Data Collection
