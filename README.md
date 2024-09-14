@@ -34,6 +34,7 @@ Create folder in templates and create below 3 files to begin with:
 1. prompt.json
 2. seed_ideas.json
 3. data.csv (will be used as context for idea generation and data analysis)
+
 You can copy the templates/RabyAI folder to start with.
 
 ## Features
