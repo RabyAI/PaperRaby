@@ -65,7 +65,7 @@ python launch_raby.py --project YOURPROJECT --model "claude-3-5-sonnet-20240620"
 
 - Consolidate your target idea in templates/YOURPROJECT/ideas.json.
 - Consolidate your data into data.csv file in templates/YOURPROJECT/data.csv.
-- This feature will help to analysis data and create plots into results/YOURPROJECT/datetime_ideaname.
+- This feature will help to analysis data and create plots into results/YOURPROJECT/DATETIME_IDEANAME.
 
 ```
 python launch_raby.py --project YOURPROJECT --model "claude-3-5-sonnet-20240620" --experiment
@@ -87,7 +87,7 @@ sudo apt-get install texlive-full
 Install [MiKTeX](https://miktex.org/) or [TeX Live](https://www.tug.org/texlive/)
 
 Using AI write the paper based on the outline in latex/template.tex.
-Paper exported to results/YOURPROJECT/YOURPROJECT.pdf.
+Paper exported to results/YOURPROJECT/DATETIME_IDEANAME.pdf.
 ```
 python launch_raby.py --project Blindbox --model "claude-3-5-sonnet-20240620" --writeup
 ```
