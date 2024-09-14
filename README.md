@@ -74,7 +74,6 @@ python launch_raby.py --project YOURPROJECT --model "claude-3-5-sonnet-20240620"
 Before write the paper, please make sure pdflatex is installed:
 
 - Mac: 
-
 Install [MacTex](https://www.tug.org/mactex/)
 
 - Linux: 
@@ -83,7 +82,6 @@ sudo apt-get install texlive-full
 ```
 
 - Windows: 
-
 Install [MiKTeX](https://miktex.org/) or [TeX Live](https://www.tug.org/texlive/)
 
 Using AI write the paper based on the outline in latex/template.tex
