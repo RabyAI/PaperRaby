@@ -61,9 +61,9 @@ python launch_raby.py --project YOURPROJECT --model "claude-3-5-sonnet-20240620"
 
 ### Data analysis and create plots
 
-Consolidate your target idea in templates/YOURPROJECT/ideas.json
-Consolidate your data into data.csv file in templates/YOURPROJECT/data.csv
-This feature will help to analysis data and create plots into results/YOURPROJECT/datetime_ideaname
+Consolidate your target idea in templates/YOURPROJECT/ideas.json.
+Consolidate your data into data.csv file in templates/YOURPROJECT/data.csv.
+This feature will help to analysis data and create plots into results/YOURPROJECT/datetime_ideaname.
 
 ```
 python launch_raby.py --project YOURPROJECT --model "claude-3-5-sonnet-20240620" --experiment
