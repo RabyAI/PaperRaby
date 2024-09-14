@@ -84,12 +84,14 @@ sudo apt-get install texlive-full
 - Windows: 
 Install [MiKTeX](https://miktex.org/) or [TeX Live](https://www.tug.org/texlive/)
 
-Using AI write the paper based on the outline in latex/template.tex
+Using AI write the paper based on the outline in latex/template.tex.
+Paper exported to results/YOURPROJECT/YOURPROJECT.pdf.
 ```
 python launch_raby.py --project Blindbox --model "claude-3-5-sonnet-20240620" --writeup
 ```
 
-Generate PDF only
+Generate PDF only.
+Paper exported to results/YOURPROJECT/test.pdf.
 ```
 python launch_raby.py --project Blindbox --model "claude-3-5-sonnet-20240620" --writeup --pdf
 ```
