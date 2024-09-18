@@ -18,6 +18,7 @@ from raby.generate_ideas import generate_ideas, check_idea_novelty
 from raby.collect_data import collect_data_from_web, collect_data_from_pdf
 from raby.perform_experiments import perform_experiments
 from raby.perform_writeup import perform_writeup, generate_latex
+from raby.perform_review import perform_review, load_paper, perform_improvement
 
 NUM_REFLECTIONS = 3
 
@@ -78,6 +79,12 @@ def parse_arguments():
         default=False,
         action="store_true",
         help="Generate PDF only.",
+    )
+    parser.add_argument(
+        "--review",
+        default=False,
+        action="store_true",
+        help="Review the paper.",
     )
     parser.add_argument(
         "--improvement",
@@ -240,7 +247,6 @@ def do_writeup(
         print(f"*Starting writeup for idea: {idea_name}*")
 
         fnames = [vis_file, notes]
-        
         io = InputOutput(
             yes=True, chat_history_file=f"{folder_name}/{idea_name}_aider.txt"
         )
@@ -272,54 +278,7 @@ def do_writeup(
                 return False
             print("Done writeup")
 
-        # print_time()
-        # print(f"*Starting Review*")
-        # ## REVIEW PAPER
-        # if writeup == "latex":
-        #     try:
-        #         paper_text = load_paper(f"{folder_name}/{idea['Name']}.pdf")
-        #         review = perform_review(
-        #             paper_text,
-        #             model="gpt-4o-2024-05-13",
-        #             client=openai.OpenAI(),
-        #             num_reflections=5,
-        #             num_fs_examples=1,
-        #             num_reviews_ensemble=5,
-        #             temperature=0.1,
-        #         )
-        #         # Store the review in separate review.txt file
-        #         with open(osp.join(folder_name, "review.txt"), "w") as f:
-        #             f.write(json.dumps(review, indent=4))
-        #     except Exception as e:
-        #         print(f"Failed to perform review: {e}")
-        #         return False
 
-        # ## IMPROVE WRITEUP
-        # if writeup == "latex" and improvement:
-        #     print_time()
-        #     print(f"*Starting Improvement*")
-        #     try:
-        #         perform_improvement(review, coder)
-        #         generate_latex(
-        #             coder, folder_name, f"{folder_name}/{idea['Name']}_improved.pdf"
-        #         )
-        #         paper_text = load_paper(f"{folder_name}/{idea['Name']}_improved.pdf")
-        #         review = perform_review(
-        #             paper_text,
-        #             model="gpt-4o-2024-05-13",
-        #             client=openai.OpenAI(),
-        #             num_reflections=5,
-        #             num_fs_examples=1,
-        #             num_reviews_ensemble=5,
-        #             temperature=0.1,
-        #         )
-        #         # Store the review in separate review.txt file
-        #         with open(osp.join(folder_name, "review_improved.txt"), "w") as f:
-        #             f.write(json.dumps(review))
-        #     except Exception as e:
-        #         print(f"Failed to perform improvement: {e}")
-        #         return False
-        # return True
     except Exception as e:
         print(f"Failed to write idea {idea_name}: {str(e)}")
         return False
@@ -329,6 +288,110 @@ def do_writeup(
             sys.stdout = original_stdout
             sys.stderr = original_stderr
             log.close()
+
+
+def do_review(
+    base_dir,
+    results_dir,
+    idea,
+    idea_name,
+    model,
+    client,
+    client_model,
+):
+    print_time()
+    print(f"*Starting Review*")
+
+    folder_name = osp.join(results_dir, idea_name)
+
+    ## REVIEW PAPER
+    try:
+        paper_text = load_paper(f"{folder_name}/{idea['Name']}.pdf")
+        review = perform_review(
+            paper_text,
+            model=model,
+            client=client,
+            num_reflections=5,
+            num_fs_examples=1,
+            num_reviews_ensemble=5,
+            temperature=0.1,
+        )
+        # Store the review in separate review.txt file
+        with open(osp.join(folder_name, "review.txt"), "w") as f:
+            f.write(json.dumps(review, indent=4))
+    except Exception as e:
+        print(f"Failed to perform review: {e}")
+        return False
+    
+
+def do_improvement(
+    base_dir,
+    results_dir,
+    idea,
+    idea_name,
+    model,
+    client,
+    client_model,
+):
+    ## IMPROVE WRITEUP
+    
+    folder_name = osp.join(results_dir, idea_name)
+    destination_dir = folder_name
+
+    vis_file = osp.join(folder_name, "plot.py")
+    notes = osp.join(folder_name, "notes.txt")
+    fnames = [vis_file, notes]
+    io = InputOutput(
+        yes=True, chat_history_file=f"{folder_name}/{idea_name}_aider.txt"
+    )
+    
+    if model == "deepseek-coder-v2-0724":
+        main_model = Model("deepseek/deepseek-coder")
+    elif model == "llama3.1-405b":
+        main_model = Model("openrouter/meta-llama/llama-3.1-405b-instruct")
+    else:
+        main_model = Model(model)
+    coder = Coder.create(
+        main_model=main_model, #"gpt-4o-2024-05-13"
+        fnames=fnames, #openai.OpenAI(),
+        io=io,
+        stream=False,
+        use_git=False,
+        edit_format="diff",
+    )
+
+    review_file_path = osp.join(folder_name, "review.txt")
+    if osp.exists(review_file_path):
+        with open(review_file_path, "r") as f:
+            review = json.load(f)
+    else:
+        print(f"Review file not found at {review_file_path}")
+        return False
+
+    print_time()
+    print(f"*Starting Improvement*")
+    try:
+        perform_improvement(review, coder)
+        generate_latex(
+            coder, folder_name, f"{folder_name}/{idea['Name']}_improved.pdf"
+        )
+        paper_text = load_paper(f"{folder_name}/{idea['Name']}_improved.pdf")
+        review = perform_review(
+            paper_text,
+            main_model=main_model, #"gpt-4o-2024-05-13"
+            fnames=fnames, #openai.OpenAI(),
+            num_reflections=5,
+            num_fs_examples=1,
+            num_reviews_ensemble=5,
+            temperature=0.1,
+        )
+        # Store the review in separate review.txt file
+        with open(osp.join(folder_name, "review_improved.txt"), "w") as f:
+            f.write(json.dumps(review))
+    except Exception as e:
+        print(f"Failed to perform improvement: {e}")
+        return False
+    return True
 
 if __name__ == "__main__":
     args = parse_arguments()
@@ -471,3 +534,48 @@ if __name__ == "__main__":
             print(f"Completed writeup for idea: {idea['Name']}, Success: {success}")
         except Exception as e:
             print(f"Failed to evaluate idea {idea['Name']}: {str(e)}")
+
+    if args.review:
+
+        with open(osp.join(base_dir, "ideas.json"), "r") as f:
+            ideas = json.load(f)
+        novel_ideas = [idea for idea in ideas]
+
+        for idea in novel_ideas:
+            print(f"Review idea: {idea['Name']}")
+        try:
+            success = do_review(
+                base_dir,
+                results_dir,
+                idea,
+                idea['results_folder'],
+                args.model,
+                client,
+                client_model,
+            )
+            print(f"Completed review for idea: {idea['Name']}, Success: {success}")
+        except Exception as e:
+            print(f"Failed to review idea {idea['Name']}: {str(e)}")
+
+
+    if args.improvement:
+
+        with open(osp.join(base_dir, "ideas.json"), "r") as f:
+            ideas = json.load(f)
+        novel_ideas = [idea for idea in ideas]
+
+        for idea in novel_ideas:
+            print(f"Improve idea: {idea['Name']}")
+        try:
+            success = do_improvement(
+                base_dir,
+                results_dir,
+                idea,
+                idea['results_folder'],
+                args.model,
+                client,
+                client_model,
+            )
+            print(f"Completed improvement for idea: {idea['Name']}, Success: {success}")
+        except Exception as e:
+            print(f"Failed to improve idea {idea['Name']}: {str(e)}")

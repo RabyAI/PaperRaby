@@ -96,19 +96,29 @@ Install [MiKTeX](https://miktex.org/) or [TeX Live](https://www.tug.org/texlive/
 Using AI write the paper based on the outline in latex/template.tex.
 Paper exported to results/YOURPROJECT/IDEANAME.pdf.
 ```
-python launch_raby.py --project Blindbox --model "claude-3-5-sonnet-20240620" --writeup
+python launch_raby.py --project YOURPROJECT --model "claude-3-5-sonnet-20240620" --writeup
 ```
 
 Generate PDF only.
 Paper exported to results/YOURPROJECT/test.pdf.
 ```
-python launch_raby.py --project Blindbox --model "claude-3-5-sonnet-20240620" --writeup --pdf
+python launch_raby.py --project YOURPROJECT --model "claude-3-5-sonnet-20240620" --writeup --pdf
 ```
 
-### In the queue
+### AI research paper review
 
-- Citation management and formatting
-- AI research paper review
+Review results saved to review.txt.
+```
+python launch_raby.py --project YOURPROJECT --model "gpt-4o-2024-05-13" --review
+```
+
+### Improve the paper based on review results
+
+Improved paper exported to results/YOURPROJECT/IDEANAME_improved.pdf.
+And the review result of improved paper saved to review_improved.txt.
+```
+python launch_raby.py --project YOURPROJECT --model "claude-3-5-sonnet-20240620" --improvement
+```
 
 ## License
 This project is licensed under the Apache 2.0 License.
