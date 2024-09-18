@@ -125,6 +125,7 @@ This project is licensed under the Apache 2.0 License.
 
 ## Acknowledgments
 - [AI-Scientist](https://github.com/SakanaAI/AI-Scientist)
+- [Cursor](https://www.cursor.com/)
 
 ## Disclaimer
 This tool is designed to assist in the research process, not to replace human judgment or creativity. Users should always review and verify AI-generated content for accuracy and appropriateness.
