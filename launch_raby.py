@@ -378,8 +378,8 @@ def do_improvement(
         paper_text = load_paper(f"{folder_name}/{idea['Name']}_improved.pdf")
         review = perform_review(
             paper_text,
-            main_model=main_model, #"gpt-4o-2024-05-13"
-            fnames=fnames, #openai.OpenAI(),
+            model=model,
+            client=client,
             num_reflections=5,
             num_fs_examples=1,
             num_reviews_ensemble=5,
