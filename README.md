@@ -105,14 +105,14 @@ Paper exported to results/YOURPROJECT/test.pdf.
 python launch_raby.py --project YOURPROJECT --model "claude-3-5-sonnet-20240620" --writeup --pdf
 ```
 
-### AI research paper review
+### AI paper review
 
 Review results saved to review.txt.
 ```
 python launch_raby.py --project YOURPROJECT --model "gpt-4o-2024-05-13" --review
 ```
 
-### Improve the paper based on review results
+### Improve the paper based on AI Paper review results
 
 Improved paper exported to results/YOURPROJECT/IDEANAME_improved.pdf.
 And the review result of improved paper saved to review_improved.txt.
