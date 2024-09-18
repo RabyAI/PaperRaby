@@ -518,6 +518,9 @@ if __name__ == "__main__":
         novel_ideas = [idea for idea in ideas]
 
         for idea in novel_ideas:
+            if not idea.get('novel', False):
+                print(f"Skipping idea: {idea['Name']} as it is not novel")
+                continue
             print(f"Processing idea: {idea['Name']}")
         try:
             success = do_writeup(
