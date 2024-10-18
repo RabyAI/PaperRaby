@@ -1,0 +1,75 @@
+This is BibTeX, Version 0.99d (TeX Live 2024)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: template.aux
+The style file: iclr2024_conference.bst
+Database file #1: references.bib
+Repeated entry---line 37 of file references.bib
+ : @article{Okazaki2017HistoryOT
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 52 of file references.bib
+ : @inproceedings{Cwiertka2018ConsumingLI
+ :                                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 59 of file references.bib
+ : @inproceedings{Esping-Andersen1993ChangingC
+ :                                            ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 66 of file references.bib
+ : @article{Okazaki2017HistoryOT
+ :                              ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 92 of file references.bib
+ : @inproceedings{Cwiertka2018ConsumingLI
+ :                                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 116 of file references.bib
+ : @article{Granato1996TheEO
+ :                          ,
+I'm skipping whatever remains of this entry
+Warning--empty booktitle in Cwiertka2018ConsumingLI
+Warning--empty booktitle in Erikson1993TheCF
+Warning--empty booktitle in Esping-Andersen1993ChangingC
+Warning--empty booktitle in Huaiju2014EthicalIO
+You've used 7 entries,
+            2773 wiz_defined-function locations,
+            638 strings with 6056 characters,
+and the built_in function-call counts, 2901 in all, are:
+= -- 240
+> -- 150
+< -- 5
++ -- 52
+- -- 45
+* -- 204
+:= -- 449
+add.period$ -- 22
+call.type$ -- 7
+change.case$ -- 36
+chr.to.int$ -- 7
+cite$ -- 18
+duplicate$ -- 150
+empty$ -- 271
+format.name$ -- 56
+if$ -- 610
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 7
+newline$ -- 44
+num.names$ -- 28
+pop$ -- 86
+preamble$ -- 1
+purify$ -- 29
+quote$ -- 0
+skip$ -- 104
+stack$ -- 0
+substring$ -- 74
+swap$ -- 7
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 77
+warning$ -- 4
+while$ -- 24
+width$ -- 0
+write$ -- 92
+(There were 6 error messages)

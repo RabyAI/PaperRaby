@@ -1,0 +1,51 @@
+\begin{thebibliography}{7}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Brockington et~al.(2019)Brockington, Coast, Mdee, Howland, and
+  Randall]{Brockington2019AssetsAD}
+D.~Brockington, E.~Coast, A.~Mdee, O.~Howland, and S.~Randall.
+\newblock Assets and domestic units: methodological challenges for longitudinal
+  studies of poverty dynamics.
+\newblock \emph{The Journal of Peasant Studies}, 48:\penalty0 159 -- 179, 2019.
+
+\bibitem[Cwiertka \& Machotka(2018)Cwiertka and
+  Machotka]{Cwiertka2018ConsumingLI}
+K.~Cwiertka and Ewa Machotka.
+\newblock Consuming life in post-bubble japan.
+\newblock 2018.
+
+\bibitem[Erikson \& Goldthorpe(1993)Erikson and Goldthorpe]{Erikson1993TheCF}
+R.~Erikson and J.~Goldthorpe.
+\newblock The constant flux: A study of class mobility in industrial societies.
+\newblock 1993.
+
+\bibitem[Esping-Andersen(1993)]{Esping-Andersen1993ChangingC}
+G.~Esping-Andersen.
+\newblock Changing classes : stratification and mobility in post-industrial
+  societies.
+\newblock 1993.
+
+\bibitem[Granato et~al.(1996)Granato, Inglehart, and Leblang]{Granato1996TheEO}
+Jim Granato, R.~Inglehart, and David Leblang.
+\newblock The effect of cultural values on economic development: Theory,
+  hypotheses, and some empirical tests.
+\newblock \emph{American Journal of Political Science}, 40:\penalty0 607--631,
+  1996.
+
+\bibitem[Huaiju(2014)]{Huaiju2014EthicalIO}
+Wang Huaiju.
+\newblock Ethical implication of matter, symbol and symbolic consumption.
+\newblock 2014.
+
+\bibitem[Okazaki(2017)]{Okazaki2017HistoryOT}
+Tetsuji Okazaki.
+\newblock History of the living standard in post-war japan: Labor productivity,
+  consumption, and leisure.
+\newblock \emph{CIRJE J-Series}, 273:\penalty0 1--20, 2017.
+\newblock (in Japanese).
+
+\end{thebibliography}
