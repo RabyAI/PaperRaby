@@ -1,0 +1,18 @@
+[
+    {
+        "Name": "btc_indicators_impact",
+        "Title": "Multi-dimensional Analysis of Technical Indicators' Impact on Bitcoin Price Dynamics",
+        "Experiment": "Conduct comprehensive analysis of five key Bitcoin metrics (Active Addresses, Block Size, Google Trends, Mining Hashrate, and Transaction Volume) using time series analysis and machine learning models to identify their individual and combined effects on price movements. Implement both linear and non-linear modeling approaches to capture complex relationships.",
+        "Interestingness": 8,
+        "Feasibility": 7,
+        "Novelty": 6
+    },
+    {
+        "Name": "btc_rolling_lag_correlation",
+        "Title": "Rolling Lag Correlation Analysis of Bitcoin Metrics for Short-Term Price Prediction",
+        "Experiment": "1. Normalize all metrics to ensure comparability. 2. Compute rolling correlations between each normalized metric and Bitcoin price with various lag periods (0, 1, 2 months). 3. Identify metrics with strongest lagged correlations to price. 4. Visualize changing correlations over time. 5. Develop a simple linear regression model using lagged metrics to predict next month's price. 6. Evaluate model performance and discuss implications for short-term price movements.",
+        "Interestingness": 8,
+        "Feasibility": 8,
+        "Novelty": 7
+    }
+]

@@ -97,6 +97,7 @@ def parse_arguments():
         type=str,
         default="claude-3-5-sonnet-20240620",
         choices=[
+            "claude-3-5-sonnet-20241022",
             "claude-3-5-sonnet-20240620",
             "gpt-4o-2024-05-13",
             "deepseek-coder-v2-0724",
@@ -397,7 +398,7 @@ if __name__ == "__main__":
     args = parse_arguments()
 
     # Create client
-    if args.model == "claude-3-5-sonnet-20240620":
+    if args.model in ["claude-3-5-sonnet-20240620", "claude-3-5-sonnet-20241022"]:
         import anthropic
 
         print(f"Using Anthropic API with model {args.model}.")
