@@ -135,7 +135,7 @@ def do_experiment(
     destination_dir = folder_name
     shutil.copytree(base_dir, destination_dir, dirs_exist_ok=True)
 
-    idea['results_folder'] = folder_name
+    idea['results_folder'] = idea_name
     with open(osp.join(base_dir, "ideas.json"), "r") as f:
         ideas = json.load(f)
     for i, existing_idea in enumerate(ideas):
@@ -514,7 +514,7 @@ if __name__ == "__main__":
 
     if args.writeup:
 
-        with open(osp.join(base_dir, "ideas.json"), "r") as f:
+        with open(osp.join(results_dir, "ideas.json"), "r") as f:
             ideas = json.load(f)
         novel_ideas = [idea for idea in ideas]
 
@@ -541,7 +541,7 @@ if __name__ == "__main__":
 
     if args.review:
 
-        with open(osp.join(base_dir, "ideas.json"), "r") as f:
+        with open(osp.join(results_dir, "ideas.json"), "r") as f:
             ideas = json.load(f)
         novel_ideas = [idea for idea in ideas]
 
@@ -564,7 +564,7 @@ if __name__ == "__main__":
 
     if args.improvement:
 
-        with open(osp.join(base_dir, "ideas.json"), "r") as f:
+        with open(osp.join(results_dir, "ideas.json"), "r") as f:
             ideas = json.load(f)
         novel_ideas = [idea for idea in ideas]
 
