@@ -1,0 +1,38 @@
+{
+    "Summary": "This paper attempts to predict Bitcoin price movements using temporal analysis of multiple on-chain metrics through 60-day rolling windows. While claiming 73% directional accuracy, the approach relies primarily on basic correlation analysis without rigorous validation.",
+    "Strengths": [
+        "Addresses a relevant problem in cryptocurrency analysis",
+        "Uses comprehensive historical dataset (2011-2023)",
+        "Attempts to combine multiple metrics rather than single indicators"
+    ],
+    "Weaknesses": [
+        "Serious data integrity issues (future citations, unverifiable 2024 data)",
+        "Limited technical novelty - primarily basic correlation analysis",
+        "Lack of rigorous statistical validation and proper baseline comparisons",
+        "Poor reproducibility due to missing implementation details",
+        "Inadequate error analysis and ablation studies"
+    ],
+    "Originality": 2,
+    "Quality": 2,
+    "Clarity": 2,
+    "Significance": 2,
+    "Questions": [
+        "What statistical tests validate the claimed correlations?",
+        "How was the 60-day window size optimized?",
+        "Why weren't standard time series models used as baselines?",
+        "How are prediction errors distributed across different market conditions?"
+    ],
+    "Limitations": [
+        "Method fails during high volatility periods",
+        "Limited theoretical justification",
+        "Poor generalizability beyond Bitcoin",
+        "Questionable data validity and reproducibility"
+    ],
+    "Ethical Concerns": true,
+    "Soundness": 2,
+    "Presentation": 2,
+    "Contribution": 1,
+    "Overall": 3,
+    "Confidence": 4,
+    "Decision": "Reject"
+}
