@@ -105,6 +105,11 @@ Paper exported to results/YOURPROJECT/test.pdf.
 python launch_raby.py --project YOURPROJECT --model "claude-3-5-sonnet-20240620" --writeup --pdf
 ```
 
+For export to docx format, please install [Pandoc](https://pandoc.org/) and run
+```
+pandoc -s template.tex -o output.docx
+```
+
 ### AI paper review
 
 Review results saved to review.txt.
