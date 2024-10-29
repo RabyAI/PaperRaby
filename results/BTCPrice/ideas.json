@@ -6,6 +6,7 @@
         "Interestingness": 8,
         "Feasibility": 8,
         "Novelty": 7,
-        "novel": true
+        "novel": true,
+        "results_folder": "20241029_105128_btc_rolling_lag_correlation"
     }
 ]

@@ -1,0 +1,42 @@
+\begin{thebibliography}{6}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Chen(2023)]{Chen2023AnalysisOB}
+Junwei Chen.
+\newblock Analysis of bitcoin price prediction using machine learning.
+\newblock \emph{Journal of Risk and Financial Management}, 2023.
+
+\bibitem[Ji et~al.(2019)Ji, Kim, and Im]{Ji2019ACS}
+Suhwan Ji, Jongmin Kim, and Hyeonseung Im.
+\newblock A comparative study of bitcoin price prediction using deep learning.
+\newblock \emph{Mathematics}, 2019.
+
+\bibitem[Jung et~al.(2024)Jung, Kim, and Lee]{Jung2024DecodingBL}
+H.~Jung, Jang~Hyun Kim, and Haein Lee.
+\newblock Decoding bitcoin: leveraging macro- and micro-factors in time series
+  analysis for price prediction.
+\newblock \emph{PeerJ Computer Science}, 10, 2024.
+
+\bibitem[Kervanci et~al.(2023)Kervanci, Akay, and
+  Özceylan]{Kervanci2023BitcoinPP}
+I.~Kervanci, M.~Akay, and Eren Özceylan.
+\newblock Bitcoin price prediction using lstm, gru and hybrid lstm-gru with
+  bayesian optimization, random search, and grid search for the next days.
+\newblock \emph{Journal of Industrial and Management Optimization}, 2023.
+
+\bibitem[RABY(2024)]{paperraby}
+RABY.
+\newblock Raby: Scientific discovery ai agent.
+\newblock 2024.
+
+\bibitem[Zhang et~al.(2024)Zhang, Garg, Golden, Brockett, and
+  Sharma]{Zhang2024SegmentingBT}
+Yuxin Zhang, R.~Garg, Linda~L. Golden, P.~Brockett, and Ajit Sharma.
+\newblock Segmenting bitcoin transactions for price movement prediction.
+\newblock \emph{Journal of Risk and Financial Management}, 2024.
+
+\end{thebibliography}
