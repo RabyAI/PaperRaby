@@ -151,7 +151,7 @@ def do_experiment(
     #     baseline_results = f.read()
     with open(osp.join(base_dir, "data.csv"), "r") as f:
         reader = csv.DictReader(f)
-        baseline_results = json.dumps([row for _, row in zip(range(200), reader)])
+        baseline_results = json.dumps([row for _, row in zip(range(5000), reader)])
 
     vis_file = osp.join(folder_name, "plot.py")
     notes = osp.join(folder_name, "notes.txt")
