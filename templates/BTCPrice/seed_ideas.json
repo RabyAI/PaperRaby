@@ -1,0 +1,10 @@
+[
+  {
+  "Name": "btc_indicators_impact",
+  "Title": "Multi-dimensional Analysis of Technical Indicators' Impact on Bitcoin Price Dynamics",
+  "Experiment": "Conduct comprehensive analysis of five key Bitcoin metrics (Active Addresses, Block Size, Google Trends, Mining Hashrate, and Transaction Volume) using time series analysis and machine learning models to identify their individual and combined effects on price movements. Implement both linear and non-linear modeling approaches to capture complex relationships.",
+  "Interestingness": 8,
+  "Feasibility": 7,
+  "Novelty": 6
+  }
+]

@@ -112,7 +112,7 @@ def parse_arguments():
             "vertex_ai/claude-3-sonnet@20240229",
             "vertex_ai/claude-3-haiku@20240307",
         ],
-        help="Model to use for AI Scientist.",
+        help="Model to use for Raby.",
     )
     return parser.parse_args()
 
