@@ -1,0 +1,67 @@
+This is BibTeX, Version 0.99d (TeX Live 2024)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: template.aux
+The style file: iclr2024_conference.bst
+Database file #1: references.bib
+Repeated entry---line 48 of file references.bib
+ : @article{Robinaugh2019TheNA
+ :                            ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 59 of file references.bib
+ : @article{Contreras2019TheSO
+ :                            ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 81 of file references.bib
+ : @article{Pereira-Morales2019NetworkAO
+ :                                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 116 of file references.bib
+ : @article{Pereira-Morales2019NetworkAO
+ :                                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 159 of file references.bib
+ : @article{Fried2016MentalDA
+ :                           ,
+I'm skipping whatever remains of this entry
+You've used 7 entries,
+            2773 wiz_defined-function locations,
+            646 strings with 6539 characters,
+and the built_in function-call counts, 4064 in all, are:
+= -- 334
+> -- 327
+< -- 0
++ -- 109
+- -- 102
+* -- 381
+:= -- 653
+add.period$ -- 21
+call.type$ -- 7
+change.case$ -- 55
+chr.to.int$ -- 7
+cite$ -- 14
+duplicate$ -- 146
+empty$ -- 274
+format.name$ -- 109
+if$ -- 825
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 7
+newline$ -- 43
+num.names$ -- 28
+pop$ -- 96
+preamble$ -- 1
+purify$ -- 48
+quote$ -- 0
+skip$ -- 120
+stack$ -- 0
+substring$ -- 146
+swap$ -- 7
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 77
+warning$ -- 0
+while$ -- 27
+width$ -- 0
+write$ -- 98
+(There were 5 error messages)

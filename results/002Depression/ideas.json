@@ -1,0 +1,12 @@
+[
+    {
+        "Name": "temporal_symptom_dynamics",
+        "Title": "Temporal Dynamics of Depression Symptoms: A Weighted Network Approach to Severity Assessment",
+        "Experiment": "Use an existing survey platform for symptom logging three times a week over 6 weeks. Apply time series analysis and dynamic network modeling, incorporating symptom centrality weights. Compare temporal patterns with static assessments in predicting clinically evaluated depression severity.",
+        "Interestingness": 9,
+        "Feasibility": 8,
+        "Novelty": 8,
+        "novel": true,
+        "results_folder": "20241030_113627_temporal_symptom_dynamics"
+    }
+]

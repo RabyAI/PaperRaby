@@ -1,0 +1,10 @@
+[
+  {
+    "Name": "symptom_severity_assessment",
+    "Title": "Dynamic Symptom Pattern Analysis: A Multi-dimensional Approach to Depression Severity Assessment",
+    "Experiment": "Design a comprehensive study that collects data on core depression symptoms. Include both self-reported measures and clinician assessments for validation.",
+    "Interestingness": 8,
+    "Feasibility": 7,
+    "Novelty": 6
+  }
+]

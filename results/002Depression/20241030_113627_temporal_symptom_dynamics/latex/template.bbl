@@ -1,0 +1,58 @@
+\begin{thebibliography}{7}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Contreras et~al.(2019)Contreras, Nieto, Valiente, Espinosa, and
+  Vázquez]{Contreras2019TheSO}
+A.~Contreras, Inés Nieto, Carmen Valiente, Regina Espinosa, and C.~Vázquez.
+\newblock The study of psychopathology from the network analysis perspective: A
+  systematic review.
+\newblock \emph{Psychotherapy and Psychosomatics}, 88:\penalty0 71 -- 83, 2019.
+
+\bibitem[Fried et~al.(2016)Fried, van Borkulo, Cramer, Boschloo, Schoevers, and
+  Borsboom]{Fried2016MentalDA}
+Eiko~I. Fried, Claudia~D van Borkulo, A.~Cramer, L.~Boschloo, R.~Schoevers, and
+  D.~Borsboom.
+\newblock Mental disorders as networks of problems: a review of recent
+  insights.
+\newblock \emph{Social Psychiatry and Psychiatric Epidemiology}, 52:\penalty0 1
+  -- 10, 2016.
+
+\bibitem[Kroenke et~al.(2001)Kroenke, Spitzer, and Williams]{Kroenke2001ThePV}
+K.~Kroenke, R.~Spitzer, and Janet B~W Williams.
+\newblock The phq-9: validity of a brief depression severity measure.
+\newblock \emph{Journal of general internal medicine}, 16 9:\penalty0 606--13,
+  2001.
+
+\bibitem[Marsman et~al.(2018)Marsman, Borsboom, Kruis, Epskamp, van Bork,
+  Waldorp, van~der Maas, and Maris]{Marsman2018AnIT}
+M.~Marsman, D.~Borsboom, J.~Kruis, S.~Epskamp, R.~van Bork, L.~Waldorp, H.L.J.
+  van~der Maas, and G.~Maris.
+\newblock An introduction to network psychometrics: Relating ising network
+  models to item response theory models.
+\newblock \emph{Multivariate Behavioral Research}, 53:\penalty0 15 -- 35, 2018.
+
+\bibitem[Pereira-Morales et~al.(2019)Pereira-Morales, Adan, and
+  Forero]{Pereira-Morales2019NetworkAO}
+Angela~J. Pereira-Morales, A.~Adan, and D.~Forero.
+\newblock Network analysis of multiple risk factors for mental health in young
+  colombian adults.
+\newblock \emph{Journal of Mental Health}, 28:\penalty0 153 -- 160, 2019.
+
+\bibitem[Robinaugh et~al.(2019)Robinaugh, Hoekstra, Toner, and
+  Borsboom]{Robinaugh2019TheNA}
+Donald~J. Robinaugh, Ria H~A Hoekstra, Emma~R. Toner, and D.~Borsboom.
+\newblock The network approach to psychopathology: a review of the literature
+  2008–2018 and an agenda for future research.
+\newblock \emph{Psychological Medicine}, 50:\penalty0 353 -- 366, 2019.
+
+\bibitem[Ruan et~al.(2022)Ruan, Chen, Jiang, Yan, and Lin]{Ruan2022ANA}
+Qian-Nan Ruan, Ce~Chen, Deguo Jiang, Wenjie Yan, and Zhang Lin.
+\newblock A network analysis of social problem-solving and anxiety/depression
+  in adolescents.
+\newblock \emph{Frontiers in Psychiatry}, 13, 2022.
+
+\end{thebibliography}
