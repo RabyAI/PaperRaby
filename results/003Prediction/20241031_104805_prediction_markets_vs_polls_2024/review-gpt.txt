@@ -1,0 +1,50 @@
+{
+    "Summary": "The paper provides a systematic comparison of polling and prediction markets for electoral forecasting during the 2024 US Presidential election campaign. The main contributions include quantifying the differences in temporal dynamics between polling and market predictions, revealing that prediction markets exhibit higher volatility and lead polling shifts by 7-14 days, and providing a framework for understanding complementary aspects of these forecasting approaches.",
+    "Strengths": [
+        "The paper addresses an important and timely problem in electoral forecasting by comparing polling and prediction markets.",
+        "The analysis covers a significant period (three months) during a presidential campaign, providing a comprehensive dataset.",
+        "The paper employs rigorous time-series analysis and visualization techniques to quantify the differences between the two forecasting methods.",
+        "The combination of time-series analysis and visualization is a strong point.",
+        "The paper provides comprehensive data and analysis, including raw data and code, which enhances transparency and reproducibility."
+    ],
+    "Weaknesses": [
+        "The paper lacks novelty in terms of methodology; it mainly applies standard time-series analysis techniques without introducing new methods or models.",
+        "The analysis is somewhat superficial and does not deeply explore the underlying reasons for the observed differences between polling and prediction markets.",
+        "The study's focus on a single election cycle limits the generalizability of the findings.",
+        "The paper's clarity could be improved, particularly in the methodological sections, which are somewhat dense and challenging to follow.",
+        "The paper does not adequately address potential biases and limitations in prediction markets, such as susceptibility to manipulation or low liquidity.",
+        "There is a lack of robustness checks and detailed explanations of analytical techniques."
+    ],
+    "Originality": 3,
+    "Quality": 2,
+    "Clarity": 2,
+    "Significance": 2,
+    "Questions": [
+        "Can the authors provide more detailed analysis on the causes of higher volatility in prediction markets?",
+        "How do the authors address potential biases and manipulation in prediction markets?",
+        "Would the results be consistent across different types of elections (e.g., midterms, parliamentary)?",
+        "Can the authors discuss the limitations of their study in more detail, particularly the constraints of focusing on a single election cycle?",
+        "Can the authors provide more details on the data preprocessing steps?",
+        "What is the impact of external events on the observed volatility and lead-lag relationship?",
+        "Please provide a detailed explanation of the statistical methods and models used for the time-series analysis.",
+        "Can you offer a more in-depth discussion on the implications of higher volatility in prediction markets?",
+        "Can the authors provide additional robustness checks to validate the findings?",
+        "Can the authors clarify the analytical techniques used, especially the cross-correlation analysis?",
+        "Can the authors provide more detailed rationale for the choice of a 7-day rolling window?",
+        "What are the implications of the study being limited to a single election cycle? Are there plans to validate these findings with data from other elections?"
+    ],
+    "Limitations": [
+        "The paper does not adequately address the limitations and potential biases of prediction markets.",
+        "The study's focus on a single election cycle limits the generalizability of the findings.",
+        "The short time frame of three months may miss longer-term trends and seasonal effects.",
+        "The analysis does not establish causality in the market-poll relationships.",
+        "The potential for manipulation and low liquidity in prediction markets is not adequately addressed, which could impact the reliability of the findings."
+    ],
+    "Ethical Concerns": false,
+    "Soundness": 2,
+    "Presentation": 2,
+    "Contribution": 2,
+    "Overall": 3,
+    "Confidence": 4,
+    "Decision": "Reject"
+}

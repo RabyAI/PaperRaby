@@ -1,0 +1,37 @@
+\begin{thebibliography}{5}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Berg et~al.(2005)Berg, Rietz, and Tippie]{Berg2005TheIE}
+Berg, Thomas~A. Rietz, and Tippie.
+\newblock The iowa electronic market : Lessons learned and answers yearned.
+\newblock 2005.
+
+\bibitem[Fama(1970)]{Fama1970EFFICIENTCM}
+E.~Fama.
+\newblock Efficient capital markets: A review of theory and empirical work*.
+\newblock \emph{Journal of Finance}, 25:\penalty0 383--417, 1970.
+
+\bibitem[Igo(2006)]{Igo2006AGM}
+S.~Igo.
+\newblock "a gold mine and a tool for democracy": George gallup, elmo roper,
+  and the business of scientific polling, 1935-1955.
+\newblock \emph{Journal of the history of the behavioral sciences}, 42
+  2:\penalty0 109--34, 2006.
+
+\bibitem[Plott \& Sunder(1988)Plott and Sunder]{Plott1988RationalEA}
+C.~Plott and S.~Sunder.
+\newblock Rational expectations and the aggregation of diverse information in
+  laboratory security markets.
+\newblock \emph{Econometrica}, 56:\penalty0 1085--1118, 1988.
+
+\bibitem[Servan-Schreiber et~al.(2004)Servan-Schreiber, Wolfers, Pennock, and
+  Galebach]{Servan-Schreiber2004PredictionMD}
+Emile Servan-Schreiber, J.~Wolfers, David~M. Pennock, and B.~Galebach.
+\newblock Prediction markets: Does money matter?
+\newblock \emph{Electron. Mark.}, 14:\penalty0 243--251, 2004.
+
+\end{thebibliography}

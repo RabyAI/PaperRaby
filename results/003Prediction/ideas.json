@@ -1,0 +1,12 @@
+[
+    {
+        "Name": "prediction_markets_vs_polls_2024",
+        "Title": "Comparative Analysis: Prediction Markets vs Traditional Polling in the 2024 US Presidential Election",
+        "Experiment": "Design a systematic study that tracks and compares prediction market prices (from platforms like PredictIt) with traditional polling data (from established polling organizations) over the election cycle. Analyze key metrics including: price/probability movements after major events, polling shifts, accuracy relative to interim election results (e.g. primaries), volatility patterns, and the correlation between both prediction methods. Implement time-series analysis to measure lead-lag relationships between markets and polls.",
+        "Interestingness": 8,
+        "Feasibility": 7,
+        "Novelty": 6,
+        "novel": true,
+        "results_folder": "20241031_104805_prediction_markets_vs_polls_2024"
+    }
+]
