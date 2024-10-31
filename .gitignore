@@ -1,6 +1,6 @@
 templates/Blindbox
 results/Blindbox
-raby/__pycache__
+__pycache__
 .DS_Store
 database/
 survey/output/
