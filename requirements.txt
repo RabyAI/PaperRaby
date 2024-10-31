@@ -19,8 +19,8 @@ tiktoken
 wandb
 tqdm
 # Suvery
-#faiss-gpu==1.7.2
-faiss-cpu
+faiss-gpu==1.7.2
+#faiss-cpu
 h5py==3.7.0
 langchain==0.2.5
 langchain-community==0.2.5
