@@ -1,20 +1,24 @@
-# LLM APIs
-anthropic
-aider-chat
+anthropic==0.39.0
+aider_chat==0.59.0
+backoff==2.2.1
+openai==1.54.0
+
+matplotlib==3.9.2
+pypdf==5.1.0
+pymupdf4llm==0.0.14
+
+Requests==2.32.3
 backoff
-openai
-# Viz
-matplotlib
-pypdf
-pymupdf4llm
-# Misc
-requests
-backoff
-beautifulsoup4
+beautifulsoup4==4.12.3
 fitz
-torch
-numpy
+torch==2.4.1
+numpy==2.1.3
 datasets
 tiktoken
 wandb
 tqdm
+
+pandas==2.2.3
+pymupdf==1.24.13
+PyPDF2==3.0.1
+seaborn==0.13.2

@@ -1,5 +1,7 @@
 templates/Blindbox
 results/Blindbox
+templates/Farcaster
+results/Farcaster
 __pycache__
 .DS_Store
 database/

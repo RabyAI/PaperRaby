@@ -177,12 +177,14 @@ def do_experiment(
         io = InputOutput(
             yes=True, chat_history_file=f"{folder_name}/{idea_name}_aider.txt"
         )
+
         if model == "deepseek-coder-v2-0724":
             main_model = Model("deepseek/deepseek-coder")
         elif model == "llama3.1-405b":
             main_model = Model("openrouter/meta-llama/llama-3.1-405b-instruct")
         else:
             main_model = Model(model)
+
         coder = Coder.create(
             main_model=main_model,
             fnames=fnames,
@@ -398,11 +400,17 @@ if __name__ == "__main__":
     args = parse_arguments()
 
     # Create client
-    if args.model in ["claude-3-5-sonnet-20240620", "claude-3-5-sonnet-20241022"]:
+    if args.model in ["claude-3-5-sonnet-20240620"]:
         import anthropic
 
         print(f"Using Anthropic API with model {args.model}.")
         client_model = "claude-3-5-sonnet-20240620"
+        client = anthropic.Anthropic()
+    elif args.model in ["claude-3-5-sonnet-20241022"]:
+        import anthropic
+
+        print(f"Using Anthropic API with model {args.model}.")
+        client_model = "claude-3-5-sonnet-20241022"
         client = anthropic.Anthropic()
     elif args.model.startswith("bedrock") and "claude" in args.model:
         import anthropic
