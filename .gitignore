@@ -2,6 +2,8 @@ templates/Blindbox
 results/Blindbox
 templates/Farcaster
 results/Farcaster
+templates/MoviePost
+results/MoviePost
 __pycache__
 .DS_Store
 database/

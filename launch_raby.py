@@ -272,7 +272,7 @@ def do_writeup(
             edit_format="diff",
         )
         if pdf:
-            generate_latex(coder, folder_name, f"{folder_name}/test.pdf")
+            generate_latex(coder, folder_name, f"{folder_name}/output.pdf")
         else:
             try:
                 perform_writeup(idea, folder_name, coder, client, client_model)
