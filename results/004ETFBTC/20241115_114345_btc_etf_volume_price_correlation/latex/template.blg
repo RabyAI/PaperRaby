@@ -1,0 +1,53 @@
+This is BibTeX, Version 0.99d (TeX Live 2024)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: template.aux
+The style file: iclr2024_conference.bst
+Database file #1: references.bib
+Repeated entry---line 100 of file references.bib
+ : @inproceedings{Liu2015ArbitrageAA
+ :                                  ,
+I'm skipping whatever remains of this entry
+Warning--empty booktitle in Kosar2022InattentivePD
+Warning--empty booktitle in Liu2015ArbitrageAA
+You've used 6 entries,
+            2773 wiz_defined-function locations,
+            631 strings with 5883 characters,
+and the built_in function-call counts, 2890 in all, are:
+= -- 243
+> -- 180
+< -- 4
++ -- 60
+- -- 54
+* -- 229
+:= -- 446
+add.period$ -- 18
+call.type$ -- 6
+change.case$ -- 36
+chr.to.int$ -- 6
+cite$ -- 14
+duplicate$ -- 131
+empty$ -- 236
+format.name$ -- 66
+if$ -- 607
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 6
+newline$ -- 38
+num.names$ -- 24
+pop$ -- 75
+preamble$ -- 1
+purify$ -- 30
+quote$ -- 0
+skip$ -- 103
+stack$ -- 0
+substring$ -- 93
+swap$ -- 11
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 66
+warning$ -- 2
+while$ -- 22
+width$ -- 0
+write$ -- 80
+(There was 1 error message)

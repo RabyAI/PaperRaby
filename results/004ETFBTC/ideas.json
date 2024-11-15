@@ -1,0 +1,12 @@
+[
+    {
+        "Name": "btc_etf_volume_price_correlation",
+        "Title": "Bitcoin ETF Trading Volume and Price Dynamics: An Analysis of Market Efficiency and Price Discovery",
+        "Experiment": "Analyze daily trading volume data from all Bitcoin spot ETFs and compare it with Bitcoin price movements using time series analysis. Calculate correlation coefficients, perform Granger causality tests, and implement vector autoregression (VAR) models to identify lead-lag relationships between ETF trading volumes and Bitcoin prices. Additionally, examine intraday patterns and potential arbitrage opportunities.",
+        "Interestingness": 8,
+        "Feasibility": 7,
+        "Novelty": 6,
+        "novel": true,
+        "results_folder": "20241115_114345_btc_etf_volume_price_correlation"
+    }
+]
