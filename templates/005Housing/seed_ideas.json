@@ -1,0 +1,10 @@
+[
+  {
+    "Name": "housing_consumer_confidence_dynamics",
+    "Title": "Consumer Confidence as a Leading Indicator: Analyzing the Dynamic Relationships Between Consumer Sentiment, Income Levels, and Housing Market Performance",
+    "Experiment": "Design a multi-phase analysis using quarterly data from major metropolitan areas to examine how changes in consumer confidence indices precede or follow housing price movements, while controlling for income variations. The study will employ vector autoregression (VAR) models and Granger causality tests to establish temporal relationships, followed by panel regression analysis to account for regional heterogeneity.",
+    "Interestingness": 8,
+    "Feasibility": 7,
+    "Novelty": 6
+  }
+]
