@@ -102,6 +102,7 @@ def parse_arguments():
             "gpt-4o-2024-05-13",
             "deepseek-coder-v2-0724",
             "llama3.1-405b",
+            "llama3.3-70b",
             # Anthropic Claude models via Amazon Bedrock
             "bedrock/anthropic.claude-3-sonnet-20240229-v1:0",
             "bedrock/anthropic.claude-3-5-sonnet-20240620-v1:0",
@@ -182,6 +183,8 @@ def do_experiment(
             main_model = Model("deepseek/deepseek-coder")
         elif model == "llama3.1-405b":
             main_model = Model("openrouter/meta-llama/llama-3.1-405b-instruct")
+        elif model == "llama3.3-70b":
+            main_model = Model("openrouter/meta-llama/llama-3.1-405b-instruct")
         else:
             main_model = Model(model)
 
@@ -261,6 +264,8 @@ def do_writeup(
             main_model = Model("deepseek/deepseek-coder")
         elif model == "llama3.1-405b":
             main_model = Model("openrouter/meta-llama/llama-3.1-405b-instruct")
+        elif model == "llama3.3-70b":
+            main_model = Model("openrouter/meta-llama/llama3.3-70b-instruct")
         else:
             main_model = Model(model)
         coder = Coder.create(
@@ -352,6 +357,8 @@ def do_improvement(
         main_model = Model("deepseek/deepseek-coder")
     elif model == "llama3.1-405b":
         main_model = Model("openrouter/meta-llama/llama-3.1-405b-instruct")
+    elif model == "llama3.3-70b":
+        main_model = Model("openrouter/meta-llama/llama3.3-70b-instruct")
     else:
         main_model = Model(model)
     coder = Coder.create(
@@ -454,6 +461,15 @@ if __name__ == "__main__":
         client = openai.OpenAI(
             api_key=os.environ["OPENROUTER_API_KEY"],
             base_url="https://openrouter.ai/api/v1",
+        )
+    elif args.model == "llama3.3-70b":
+        import openai
+
+        print(f"Using OpenAI API with {args.model}.")
+        client_model = "meta-llama/llama-3.1-405b-instruct"
+        client = openai.OpenAI(
+            api_key=os.environ["OPENROUTER_API_KEY"],
+            base_url="http://localhost/v1",
         )
     else:
         raise ValueError(f"Model {args.model} not supported.")
