@@ -1,5 +1,5 @@
 anthropic==0.39.0
-aider_chat==0.59.0
+aider-chat==0.59.0
 backoff==2.2.1
 openai==1.47.0
 
